@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.tulipslucky_arch.twa",
+        "sha256_cert_fingerprints": ["E1:48:30:7E:AF:BA:F6:36:DE:83:F3:08:4A:E6:4C:A6:B6:4C:5B:3D:CC:E0:33:CC:98:99:BE:7A:41:0B:A1:1C"]
+      }
+    }]
