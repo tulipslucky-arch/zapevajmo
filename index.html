@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#7b2ff7">
+<title>Zapevajmo 🎤</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="notes-bg"></div>
+
+<!-- ==== EKRAN: START ==== -->
+<section id="screen-start" class="screen active">
+  <div class="logo">🎤</div>
+  <h1>Zapevajmo</h1>
+  <p class="subtitle">Pusti pesmu, ja je prepoznam<br>i nađem tekst — pa pevamo!</p>
+  <button id="btn-start">🎙️&nbsp; SLUŠAJ</button>
+  <button id="btn-manual" class="ghost">✍️ Ukucaj pesmu ručno</button>
+  <p id="start-error" class="error"></p>
+</section>
+
+<!-- ==== EKRAN: SLUŠANJE ==== -->
+<section id="screen-listening" class="screen">
+  <div class="eq"><i></i><i></i><i></i><i></i><i></i></div>
+  <h2 id="listen-status">Slušam… 🎧</h2>
+  <div id="countdown">10</div>
+  <p class="hint">Pusti pesmu glasno pored telefona</p>
+  <button id="btn-cancel" class="ghost">✋ Prekini</button>
+</section>
+
+<!-- ==== EKRAN: TEKST (KARAOKE) ==== -->
+<section id="screen-lyrics" class="screen">
+  <header class="lyr-head">
+    <button id="btn-home1" class="icon-btn" title="Početna">🏠</button>
+    <div class="song-meta">
+      <div id="song-title"></div>
+      <div id="song-artist"></div>
+    </div>
+    <button id="btn-replay" class="icon-btn" title="Ponovi od početka">🔁</button>
+  </header>
+  <div id="progress"><div id="progress-fill"></div></div>
+  <div id="lyrics-box"></div>
+  <div id="sync-controls">
+    <button id="btn-back500">« −0.5s</button>
+    <span id="offset-label">0.0s</span>
+    <button id="btn-fwd500">+0.5s »</button>
+  </div>
+</section>
+
+<!-- ==== EKRAN: RUČNA PRETRAGA ==== -->
+<section id="screen-manual" class="screen">
+  <button id="btn-home2" class="back">← Nazad</button>
+  <h2>✍️ Nađi tekst</h2>
+  <label for="in-artist">Izvođač</label>
+  <input id="in-artist" placeholder="npr. Zdravko Čolić" autocomplete="off">
+  <label for="in-title">Naziv pesme</label>
+  <input id="in-title" placeholder="npr. Ruža crvena" autocomplete="off">
+  <button id="btn-search">🔍 Nađi tekst</button>
+  <p id="manual-error" class="error"></p>
+</section>
+
+<div id="toast"></div>
+
+<script src="config.js"></script>
+<script src="acr.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

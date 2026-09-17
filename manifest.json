@@ -1,0 +1,15 @@
+{
+  "name": "Zapevajmo",
+  "short_name": "Zapevajmo",
+  "description": "Pusti pesmu - aplikacija je prepozna i prikaze sinhronizovane lyrics. Pevajmo!",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#7b2ff7",
+  "theme_color": "#7b2ff7",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
