@@ -111,7 +111,7 @@ async function openLyrics(title, artist, durationMs) {
     return;
   }
 
-  const key = "zap-offset|" + artist.toLowerCase() + "|" + title.toLowerCase();
+  const key = offsetKey();
   offsetMs = +(localStorage.getItem(key) || 0);
   $("offset-label").textContent = (offsetMs / 1000).toFixed(1) + "s";
   $("sync-controls").style.display = "flex";
@@ -177,15 +177,36 @@ function tick() {
 /* sinhr dugmad (±0.5s) */
 $("btn-back500").addEventListener("click", () => shiftOffset(-500));
 $("btn-fwd500").addEventListener("click", () => shiftOffset(500));
+function offsetKey() {
+  return "zap-offset|" + $("song-artist").textContent.toLowerCase() + "|" +
+         $("song-title").textContent.toLowerCase();
+}
+function saveOffset() {
+  localStorage.setItem(offsetKey(), String(offsetMs));
+}
 function shiftOffset(d) {
   offsetMs += d;
-  const key = "zap-offset|" + $("song-artist").textContent.toLowerCase() + "|" +
-              $("song-title").textContent.toLowerCase();
-  localStorage.setItem(key, String(offsetMs));
+  saveOffset();
   $("offset-label").textContent = (offsetMs / 1000).toFixed(1) + "s";
   if (plainMode) return;
   tick();
 }
+
+/* tap na red teksta → sinhronizacija skoči tako da taj red bude "sada" */
+$("lyrics-box").addEventListener("click", e => {
+  const el = e.target.closest(".line");
+  if (!el || plainMode || !lines.length) return;
+  const i = +el.dataset.i;
+  const target = lines[i].t;
+  /* pomeri offset tako da pozicija tickera padne tačno u ovaj red */
+  const nowPos = (performance.now() - t0) / 1000;
+  offsetMs += (target - nowPos) * 1000;
+  saveOffset();
+  $("offset-label").textContent = (offsetMs / 1000).toFixed(1) + "s";
+  curIdx = -1;
+  tick();
+  toast("⏱️ Sinhro podešen na izabrani red", 1500);
+});
 
 /* ponovi od početka */
 $("btn-replay").addEventListener("click", () => {
@@ -229,4 +250,3 @@ if ("serviceWorker" in navigator &&
     (location.protocol === "https:" || location.hostname === "localhost")) {
   navigator.serviceWorker.register("./sw.js").catch(() => {});
 }
-
